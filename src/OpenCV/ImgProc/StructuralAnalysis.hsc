@@ -10,6 +10,7 @@ module OpenCV.ImgProc.StructuralAnalysis
     , ContourRetrievalMode(..)
     , ContourApproximationMethod(..)
     , minAreaRect
+    , isContourConvex
     ) where
 
 import "primitive" Control.Monad.Primitive ( PrimMonad, PrimState, unsafePrimToPrim )
@@ -24,7 +25,7 @@ import "base" Data.Word
 import "base" Foreign.C.Types
 import "base" Foreign.Marshal.Alloc ( alloca )
 import "base" Foreign.Marshal.Array ( peekArray )
-import "base" Foreign.Marshal.Utils ( fromBool )
+import "base" Foreign.Marshal.Utils ( fromBool, toBool )
 import "base" Foreign.Ptr ( Ptr )
 import "base" Foreign.Storable ( peek )
 import "base" System.IO.Unsafe ( unsafePerformIO )
@@ -301,7 +302,8 @@ findContours mode method src = unsafePrimToPrim $
     c'method = marshalContourApproximationMethod method
 
 minAreaRect :: (IsPoint2 point2 Int32)
-            => V.Vector (point2 Int32) -> RotatedRect
+            => V.Vector (point2 Int32)
+            -> RotatedRect
 minAreaRect points =
   unsafePerformIO $ fromPtr $
   withArrayPtr (V.map toPoint points) $
@@ -315,3 +317,28 @@ minAreaRect points =
       }
     |]
   where c'numPoints = fromIntegral (V.length points)
+
+
+
+
+
+{- |  Tests a contour convexity.
+
+The function tests whether the input contour is convex or not.
+The contour must be simple, that is, without self-intersections.
+Otherwise, the function output is undefined.
+
+<http://docs.opencv.org/3.0-last-rst/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=contourarea#iscontourconvex OpenCV Sphinx doc>
+-}
+isContourConvex
+    :: (IsPoint2 point2 CFloat)
+    => V.Vector (point2 CFloat)
+    -> Bool
+isContourConvex contour = toBool $ unsafePerformIO $
+    withArrayPtr (V.map toPoint contour) $ \contourPtr ->
+        [CU.exp| bool {
+            cv::isContourConvex(cv::_InputArray( $(Point2f * contourPtr)
+                                               , $(int32_t c'numPoints)))
+        }|]
+  where
+    c'numPoints = fromIntegral $ V.length contour
