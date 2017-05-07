@@ -302,7 +302,8 @@ findContours mode method src = unsafePrimToPrim $
     c'method = marshalContourApproximationMethod method
 
 minAreaRect :: (IsPoint2 point2 Int32)
-            => V.Vector (point2 Int32) -> RotatedRect
+            => V.Vector (point2 Int32)
+            -> RotatedRect
 minAreaRect points =
   unsafePerformIO $ fromPtr $
   withArrayPtr (V.map toPoint points) $
