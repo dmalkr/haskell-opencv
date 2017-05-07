@@ -364,6 +364,8 @@ dmatchAsRec dmatch = unsafePerformIO $
         <*> peek imgIdxPtr
         <*> (realToFrac <$> peek distancePtr)
 
+mkPlacementNewInstance ''DMatch
+
 --------------------------------------------------------------------------------
 -- Algorithm
 --------------------------------------------------------------------------------
