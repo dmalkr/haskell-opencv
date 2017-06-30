@@ -1,10 +1,13 @@
-[![Hackage](https://img.shields.io/hackage/v/opencv.svg)](https://hackage.haskell.org/package/opencv)
 [![Build Status](https://travis-ci.org/LumiGuide/haskell-opencv.svg)](https://travis-ci.org/LumiGuide/haskell-opencv)
+
+[opencv ![Hackage](https://img.shields.io/hackage/v/opencv.svg)](https://hackage.haskell.org/package/opencv)
+
+[opencv-extra ![Hackage](https://img.shields.io/hackage/v/opencv-extra.svg)](https://hackage.haskell.org/package/opencv-extra)
 
 Haskell OpenCV-3.x binding
 ==========================
 
-<img src="https://raw.githubusercontent.com/LumiGuide/haskell-opencv/master/data/haskell-opencv-logo.png" width="200px" alt="Haskell OpenCV-3.x logo" />
+<img src="https://raw.githubusercontent.com/LumiGuide/haskell-opencv/master/data/haskell-opencv-logo-200x82.png" alt="Haskell OpenCV-3.x logo" />
 
 
 This is a Haskell library providing a binding to OpenCV-3.x. It binds directly
@@ -14,14 +17,6 @@ library.
 
 The library is far from complete but the framework is there to easily bind
 missing functionality.
-
-
-Documentation
--------------
-
-[Haddock documentation](http://lumiguide.github.io/haskell-opencv/doc/index.html).
-
-(The project hasn't been released to Hackage yet so you won't find any documentation there).
 
 Test Coverage
 -------------
@@ -50,15 +45,14 @@ break between minor releases, so be careful.
 Development
 -----------
 
-We use Nix to enter an environment containing all the needed dependencies. For
-the moment the following commands only work on Linux. The Nix expression for
-OpenCV currently fails to build on OS X.
+To get into an environment that contains all the needed dependencies we use Nix. 
+The following commands work both on Linux and OS X:
 
     curl https://nixos.org/nix/install | sh   # Only execute this if you haven't installed Nix yet.
+    cd opencv[-extra]
     nix-shell
 
 Then you should be able to use `cabal` as normal.
-
 
 Contributing
 ------------
@@ -82,7 +76,6 @@ program. If you include your example program in the following way:
 then run `cabal test`, now your Haddock documentation will include a nice
 picture with the output of your program. Not only that, but your example program
 will at the same time function as a test for the function you just documented!
-
 
 Policies
 --------

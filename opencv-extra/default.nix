@@ -1,4 +1,4 @@
-{ nixpkgs ? import <nixpkgs> {config = import ../nixpkgs-config.nix;}
+{ nixpkgs ? import (import ../nixpkgs.nix) {config = import ../nixpkgs-config.nix;}
 , compiler ? "default"
 }:
 
@@ -9,6 +9,6 @@ let
                        then pkgs.haskellPackages
                        else pkgs.haskell.packages.${compiler};
 
-  drv = haskellPackages.callPackage (import ./opencv-extra.nix) {};
+  drv = haskellPackages.opencv-extra;
 
 in if pkgs.lib.inNixShell then drv.env else drv

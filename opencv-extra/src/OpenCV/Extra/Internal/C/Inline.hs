@@ -34,8 +34,16 @@ openCvExtraTypesTable :: C.TypesTable
 openCvExtraTypesTable = M.fromList
   [ ( C.TypeName "Ptr_BackgroundSubtractorGMG", [t| C'Ptr_BackgroundSubtractorGMG |] )
   , ( C.TypeName "Ptr_BackgroundSubtractorMOG", [t| C'Ptr_BackgroundSubtractorMOG |] )
+  , ( C.TypeName "Ptr_Tracker"                , [t| C'Ptr_Tracker                 |] )
+  , ( C.TypeName "Ptr_TrackerFeature"         , [t| C'Ptr_TrackerFeature          |] )
+  , ( C.TypeName "Ptr_MultiTracker"           , [t| C'Ptr_MultiTracker            |] )
+  , ( C.TypeName "Ptr_MultiTrackerAlt"        , [t| C'Ptr_MultiTrackerAlt         |] )
   , ( C.TypeName "Ptr_SURF"                   , [t| C'Ptr_SURF                    |] )
   , ( C.TypeName "Ptr_GrayworldWB"            , [t| C'Ptr_GrayworldWB             |] )
   , ( C.TypeName "Ptr_LearningBasedWB"        , [t| C'Ptr_LearningBasedWB         |] )
   , ( C.TypeName "Ptr_SimpleWB"               , [t| C'Ptr_SimpleWB                |] )
+  , ( C.TypeName "Ptr_CharucoBoard"           , [t| C'Ptr'CharucoBoard            |] )
+  , ( C.TypeName "Ptr_Dictionary"             , [t| C'Ptr'Dictionary              |] )
+  , ( C.TypeName "VectorVectorPoint2f"        , [t| C'Vector'Vector'Point2f       |] )
+  , ( C.TypeName "VectorInt"                  , [t| C'Vector'Int                  |] )
   ]
